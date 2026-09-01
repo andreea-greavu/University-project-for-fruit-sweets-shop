@@ -1,33 +1,24 @@
 Fruit Sweets 🍓
-
-Am creat pt tema un magazin online de akai cu fructe sau diverse dulciuri, pornind de la laboartorul 4. Am o pagina principala cu imagini, descrieri si preturi pt produse, butoane de adaugare si stergere produse din cos, cosul de
-cumparaturi, pagina de comandat cu formular si salvare de comenzi, pagina de confirmare a comenzii si pagina de contact.
-
-##Continutul temei:
-
+For this assignment I built an online shop with fruit and various sweets. I have a main page with images, descriptions and prices for products, buttons to add and remove products from the cart, the shopping cart, an order page with a form and order saving, an order confirmation page, and a contact page.
+##Assignment contents:
 #app:
-main_app.py — initializeaza instanta Flask si inregistreaza rutele
-products.py — lista de produse 
-shop.py —  rutele aplicatiei: pagina principala, cos, checkout, contact
-
-#public : imaginile produselor, fisierele Bootstrap si CSS-ul
-style.css — stilurile CSS 
-images — imaginile produselor 
-bootstrap — fisierele Bootstrap luate din labul 4
-
-#submitted-orders: folderul in care se salveaza automat comenzile , fiecare ca fisier json
-
-#templates:  template-urile HTML
-_layout.html —   structura HTML de baza pe care o folosesc toate paginile
-cart.html — pagina cu cosul
-checkout.html — formularul pt comandare
-contact.html — pagina de contact
-index.html — pagina cu produsele
-order_success.html — pagina de confirmare dupa plasarea comenzii
-
-server.py — porneste serverul Flask pe portul 5000
-Dockerfile — porneste serverul Flask in container Alpine, accesibil pe portul 5000 si e bazat pe cel din labul 4
-requirements.txt — lista de dependente Python bazat pe cel din labul 4
-
-Ca bonusuri, am personalizat siteul cu culori rozalii, am pagina de confirmare pt comenzi care are detalii pt comanda efectuata precum produsele, pretul fiecareia, pretul total, butoane pt adaugarea sau scaderea cantitatii unui produs, salvarea comenzilor in format json.
-Pentru rulare, merge si cu python3 server.py si cu docker build -t iap1-tema ./  docker run -p 5000:5000 -it iap1-tema
+main_app.py — initializes the Flask instance and registers the routes
+products.py — the product list
+shop.py — the app's routes: main page, cart, checkout, contact
+#public: product images, Bootstrap files and the CSS
+style.css — the CSS styles
+images — the product images
+bootstrap — Bootstrap files taken from lab 4
+#submitted-orders: the folder where orders are automatically saved, each as a json file
+#templates: the HTML templates
+_layout.html — the base HTML structure used by all pages
+cart.html — the cart page
+checkout.html — the order form
+contact.html — the contact page
+index.html — the products page
+order_success.html — the confirmation page after placing an order
+server.py — starts the Flask server on port 5000
+Dockerfile — starts the Flask server in an Alpine container, accessible on port 5000, based on the one from lab 4
+requirements.txt — the list of Python dependencies, based on the one from lab 4
+I personalized the site with a pink color scheme, and the order confirmation page includes details about the placed order such as the products, each product's price, the total price, buttons to increase or decrease a product's quantity, and saving orders in json format.
+To run it, both python3 server.py and docker build -t iap1-tema ./  docker run -p 5000:5000 -it iap1-tema work.
