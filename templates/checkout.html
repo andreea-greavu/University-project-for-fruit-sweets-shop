@@ -1,0 +1,92 @@
+{% extends "_layout.html" %}
+{% block title %}Finalizeaza comanda {% endblock %}
+
+{% block content %}
+<h2 class="fw-bold mb-4">Finalizare comanda</h2>
+
+{% if not items %}
+<div class="alert alert-warning">
+    Cosul tau este gol. <a href="/" class="alert-link">Adauga produse</a>.
+</div>
+{% else %}
+
+<div class="row g-4">
+    <div class="col-lg-5 order-lg-2">
+        <div class="card shadow-sm">
+            <div class="card-header text-white fw-bold" style="background-color:#ec7cf0">Sumar comanda</div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    {% for item in items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <span>{{ item.product.name }}</span><br>
+                            <small class="text-muted">x{{ item.quantity }} × {{ "%.2f"|format(item.product.price) }} lei</small>
+                        </div>
+                        <span class="fw-semibold">{{ "%.2f"|format(item.subtotal) }} lei</span>
+                    </li>
+                    {% endfor %}
+                    <li class="list-group-item d-flex justify-content-between fw-bold bg-light">
+                        <span>Total de plata:</span>
+                        <span class="fs-5" style="color:#ec7cf0">{{ "%.2f"|format(total) }} lei</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7 order-lg-1">
+        <div class="card shadow-sm">
+            <div class="card-header text-white fw-bold" style="background-color:#ec7cf0">Datele tale</div>
+            <div class="card-body">
+                <form method="POST" action="/checkout">
+                    <div class="mb-3">
+                        <label for="full_name" class="form-label">Nume *</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefon *</label>
+                        <input type="tel" class="form-control" id="phone" name="phone"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Adresa de livrare *</label>
+                        <textarea class="form-control" id="address" name="address" rows="3"
+                                  placeholder="Strada, numar, bloc, apartament, oras, judet" required></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Metoda de plata *</label>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method"
+                                       id="pay_card" value="card" checked>
+                                <label class="form-check-label" for="pay_card">Card bancar</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method"
+                                       id="pay_transfer" value="bank_transfer">
+                                <label class="form-check-label" for="pay_transfer">Transfer bancar</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method"
+                                       id="pay_cash" value="cash">
+                                <label class="form-check-label" for="pay_cash">Ramburs</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-lg w-100" style="background-color:#ec7cf0; color:white; border:none">
+                        Plaseaza comanda
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

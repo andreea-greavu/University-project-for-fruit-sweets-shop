@@ -1,0 +1,70 @@
+{% extends "_layout.html" %}
+{% block title %}Cosul tau {% endblock %}
+
+{% block content %}
+<h2 class="fw-bold mb-4">Cosul tau</h2>
+
+{% if items %}
+<div class="table-responsive">
+    <table class="table align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Produs</th>
+                <th class="text-center">Cantitate</th>
+                <th class="text-end">Pret</th>
+                <th class="text-end">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="{{ item.product.image }}" alt="{{ item.product.name }}"
+                             style="width:60px;height:60px;object-fit:cover;border-radius:8px;">
+                        <div>
+                            <strong>{{ item.product.name }}</strong><br>
+                            <small class="text-muted">{{ item.product.category }}</small>
+                        </div>
+                    </div>
+                </td>
+                    <td class="text-center">
+                        <div class="d-flex align-items-center justify-content-center gap-1">
+                            <a href="/cart/decrease-item?id={{ item.product.id }}" class="btn btn-sm btn-outline-secondary">−</a>
+                                <span class="fw-bold mx-1">{{ item.quantity }}</span>
+                            <a href="/cart/increase-item?id={{ item.product.id }}" class="btn btn-sm btn-outline-secondary">+</a>
+                        </div>
+                    </td>
+                <td class="text-end">{{ "%.2f"|format(item.product.price) }} lei</td>
+                <td class="text-end fw-semibold">{{ "%.2f"|format(item.subtotal) }} lei</td>
+                <td class="text-end">
+                    <a href="/cart/remove-item?id={{ item.product.id }}"
+                       class="btn btn-outline-danger btn-sm"
+                       title="Elimina">✕</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr class="table-light">
+                <td colspan="3" class="text-end fw-bold fs-5">Total:</td>
+                <td class="text-end fw-bold fs-5 text-dark">{{ "%.2f"|format(total) }} lei</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+    <a href="/" class="btn btn-outline-secondary">← Continua cumparaturile</a>
+    <a href="/checkout" class="btn btn-success btn-lg px-4">Plaseaza comanda →</a>
+</div>
+
+{% else %}
+<div class="text-center py-5">
+    <p class="fs-3">Cosul tau este gol.</p>
+    <a href="/" class="btn btn-success mt-3">Descopera produsele noastre</a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "_layout.html" %}
+{% block title %}Comanda plasata!{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <div class="mb-4" style="font-size:5rem"></div>
+    <h2 class="fw-bold" style="color:#ec7cf0">Comanda a fost plasata cu succes!</h2>
+    <p class="lead text-muted mt-2">
+        Multumim, <strong>{{ order.customer.full_name }}</strong>!<br>
+        Vei primi o confirmare pe email la <strong>{{ order.customer.email }}</strong>.
+    </p>
+
+    <div class="card mx-auto mt-4 shadow-sm" style="max-width:500px">
+        <div class="card-header text-white fw-bold" style="background-color:#ec7cf0">Detalii comanda</div>
+        <ul class="list-group list-group-flush">
+            {% for item in order.products %}
+            <li class="list-group-item d-flex justify-content-between">
+                <span>{{ item.name }} × {{ item.quantity }}</span>
+                <span>{{ "%.2f"|format(item.subtotal) }} lei</span>
+            </li>
+            {% endfor %}
+            <li class="list-group-item d-flex justify-content-between fw-bold bg-light">
+                <span>Total plata:</span>
+                <span style="color:#ec7cf0">{{ "%.2f"|format(order.total) }} lei</span>
+            </li>
+        </ul>
+        <div class="card-footer text-muted small">
+            Metoda de plata: <strong>
+            {% if order.customer.payment_method == 'card' %}Card bancar
+            {% elif order.customer.payment_method == 'bank_transfer' %}Transfer bancar
+            {% elif order.customer.payment_method == 'cash' %}Ramburs
+            {% endif %}
+            </strong>
+        </div>
+    </div>
+
+    <a href="/" class="btn mt-4 px-5" style="color:#ec7cf0; border-color:#ec7cf0">Inapoi la produse</a>
+</div>
+{% endblock %}
